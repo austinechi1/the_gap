@@ -154,6 +154,52 @@ section{position:relative;}
   opacity:0.75;
 }
 
+/* ---------- PROMO BANNER ---------- */
+.promo-banner{
+  position:relative;
+  background:linear-gradient(100deg, #2E0A14 0%, var(--burgundy-deep) 35%, var(--burgundy) 65%, var(--burgundy-deep) 100%);
+  overflow:hidden;
+  white-space:nowrap;
+  border-bottom:1px solid rgba(244,239,226,0.12);
+}
+.promo-banner::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 40%, rgba(0,0,0,0.08) 100%);
+  pointer-events:none;
+}
+.promo-track{
+  display:inline-flex;
+  align-items:center;
+  animation:marquee 26s linear infinite;
+  will-change:transform;
+}
+.promo-track span{
+  font-family:var(--sans);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  font-size:clamp(0.68rem, 0.63rem + 0.2vw, 0.8rem);
+  color:var(--cream);
+  padding:0.65rem 1.4rem;
+  display:inline-flex;
+  align-items:center;
+  gap:1.4rem;
+}
+.promo-track span::after{
+  content:'✦';
+  color:var(--mauve);
+  font-size:0.7rem;
+}
+@keyframes marquee{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+@media (prefers-reduced-motion: reduce){
+  .promo-track{animation:none;}
+}
+
 /* ---------- HEADER ---------- */
 header{
   position:sticky;
@@ -247,7 +293,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   position:relative;
   background:
     linear-gradient(90deg, rgba(66,15,28,0.35) 0%, rgba(66,15,28,0.78) 55%, rgba(66,15,28,0.93) 100%),
-    url('https://placehold.co/1800x1200/2a0d16/2a0d16.png') center/cover no-repeat;
+    url('https://picsum.photos/seed/gaphero1/1800/1200') center/cover no-repeat;
 }
 .hero-inner{
   width:100%;
@@ -290,10 +336,21 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 
 /* ---------- STAT BAND ---------- */
 .stat-band{
-  background:var(--burgundy);
+  position:relative;
+  background:linear-gradient(160deg, #7A2438 0%, var(--burgundy) 45%, var(--burgundy-deep) 100%);
   padding:var(--gap-m) var(--edge);
+  overflow:hidden;
+}
+.stat-band::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,0.16), transparent 60%);
+  pointer-events:none;
 }
 .stat-grid{
+  position:relative;
+  z-index:1;
   max-width:1100px;
   margin:0 auto;
   display:grid;
@@ -401,7 +458,8 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   font-style:normal;
   letter-spacing:0.04em;
   color:var(--cream);
-  background:var(--burgundy);
+  background:linear-gradient(160deg, #7A2438 0%, var(--burgundy) 55%, var(--burgundy-deep) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 3px 8px rgba(90,22,38,0.25);
   font-size:0.78rem;
   display:inline-block;
   padding:0.35em 0.7em;
@@ -474,6 +532,27 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 
 /* ---------- WHATS INSIDE ---------- */
 .inside{padding:var(--gap-xl) 0;background:var(--cream);}
+.inside-title h2{
+  background:linear-gradient(155deg, #8A2C42 0%, var(--burgundy) 45%, var(--burgundy-deep) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,0.35));
+}
+.inside-title .sub{
+  display:inline-block;
+  font-style:normal;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-size:clamp(0.7rem, 0.65rem + 0.2vw, 0.82rem);
+  color:var(--cream);
+  background:linear-gradient(160deg, #C98590 0%, var(--mauve) 55%, var(--mauve-deep) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 10px rgba(156,87,99,0.28);
+  padding:0.5em 1.1em;
+  margin-top:1.1rem;
+}
 .inside-grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
@@ -543,7 +622,15 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 @media (max-width:760px){.ba-grid{grid-template-columns:1fr;}}
 
 /* ---------- INSIDE COMMUNITY ---------- */
-.community{padding:var(--gap-xl) 0;background:var(--burgundy);color:var(--cream);}
+.community{position:relative;padding:var(--gap-xl) 0;background:linear-gradient(155deg, #7A2438 0%, var(--burgundy) 40%, var(--burgundy-deep) 100%);color:var(--cream);overflow:hidden;}
+.community::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(110% 70% at 15% 0%, rgba(255,255,255,0.10), transparent 55%);
+  pointer-events:none;
+}
+.community .wrap{position:relative;z-index:1;}
 .community .eyebrow{color:var(--mauve);}
 .community .section-title h2{color:var(--cream);}
 .community .section-title .sub{color:var(--mauve);font-style:italic;}
@@ -587,7 +674,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   text-align:center;
   background:
     linear-gradient(rgba(66,15,28,0.62), rgba(66,15,28,0.62)),
-    url('https://placehold.co/1800x900/3a1120/3a1120.png') center/cover no-repeat;
+    url('https://picsum.photos/seed/gapband1/1800/900') center/cover no-repeat;
 }
 .imgband p{
   font-family:var(--serif);
@@ -619,7 +706,8 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   font-size:1rem;
   letter-spacing:0.03em;
   color:var(--cream);
-  background:var(--mauve);
+  background:linear-gradient(160deg, #C98590 0%, var(--mauve) 55%, var(--mauve-deep) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 3px 8px rgba(156,87,99,0.3);
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -679,6 +767,69 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 .review-card .who .role{font-size:0.78rem;color:var(--slate);opacity:0.8;}
 @media (max-width:860px){.review-grid{grid-template-columns:1fr;}}
 
+/* ---------- VIDEO TESTIMONIALS ---------- */
+.video-reviews{padding:var(--gap-xl) 0;background:var(--cream);}
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:var(--gap-s);
+}
+.video-card{
+  position:relative;
+  aspect-ratio:9/13;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--burgundy-deep);
+}
+.video-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;
+}
+.video-card:hover img{transform:scale(1.06);}
+.video-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg, rgba(42,10,17,0.85) 0%, rgba(42,10,17,0.1) 45%, rgba(42,10,17,0.35) 100%);
+}
+.video-play{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(52px, 44px + 2vw, 68px);
+  height:clamp(52px, 44px + 2vw, 68px);
+  border-radius:50%;
+  background:linear-gradient(160deg, #C98590 0%, var(--mauve) 55%, var(--mauve-deep) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 20px rgba(0,0,0,0.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+  transition:transform .3s ease;
+}
+.video-card:hover .video-play{transform:translate(-50%,-50%) scale(1.08);}
+.video-play svg{width:38%;height:38%;fill:var(--cream);margin-left:3px;}
+.video-caption{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  z-index:2;
+  padding:1.1rem 1.2rem;
+  color:var(--cream);
+}
+.video-caption .name{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:1.05rem;
+}
+.video-caption .role{
+  font-size:0.76rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--mauve);
+  margin-top:0.2rem;
+}
+@media (max-width:860px){.video-grid{grid-template-columns:1fr;}}
+
 /* ---------- CHECKLIST ---------- */
 .fit{padding:var(--gap-xl) 0;}
 .fit-list{
@@ -723,8 +874,9 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   text-align:center;
   color:var(--cream);
   background:
-    linear-gradient(rgba(42,10,17,0.85), rgba(42,10,17,0.9)),
-    url('https://placehold.co/1800x1200/2a0a11/2a0a11.png') center/cover no-repeat;
+    radial-gradient(120% 80% at 50% 0%, rgba(183,110,121,0.22), transparent 55%),
+    linear-gradient(rgba(42,10,17,0.85), rgba(42,10,17,0.92)),
+    url('https://picsum.photos/seed/gapcta1/1800/1200') center/cover no-repeat;
 }
 .final-cta .eyebrow{color:var(--mauve);}
 .final-cta h2{
@@ -797,7 +949,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   justify-content:center;
   background:
     linear-gradient(rgba(66,15,28,0.55), rgba(66,15,28,0.55)),
-    url('https://placehold.co/1800x800/2a0d16/2a0d16.png') center/cover no-repeat;
+    url('https://picsum.photos/seed/gapfooter1/1800/800') center/cover no-repeat;
 }
 .footer-photo img{height:clamp(46px, 34px + 3vw, 70px);width:auto;filter:brightness(0) invert(1);opacity:0.95;}
 
@@ -863,6 +1015,17 @@ footer{
 </style>
 </head>
 <body>
+
+<div class="promo-banner">
+  <div class="promo-track">
+    <span>Guidance · Accountability · Purpose</span>
+    <span>Close The GAP Between Vision and Execution</span>
+    <span>A God-First Community for Creative Entrepreneurs</span>
+    <span>Guidance · Accountability · Purpose</span>
+    <span>Close The GAP Between Vision and Execution</span>
+    <span>A God-First Community for Creative Entrepreneurs</span>
+  </div>
+</div>
 
 <header>
   <div class="header-inner">
@@ -932,7 +1095,7 @@ footer{
       </div>
       <div class="pillar-grid">
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://placehold.co/700x700/EBE6DE/554C5B.png?text=Clarity" alt="Clarity"></div>
+          <div class="img-box"><img src="https://picsum.photos/seed/gapclarity/700/700" alt="Clarity"></div>
           <div class="pillar-copy">
             <span class="pillar-num">01</span>
             <h3>Clarity</h3>
@@ -940,7 +1103,7 @@ footer{
           </div>
         </div>
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://placehold.co/700x700/EBE6DE/554C5B.png?text=Commitment" alt="Commitment"></div>
+          <div class="img-box"><img src="https://picsum.photos/seed/gapcommit/700/700" alt="Commitment"></div>
           <div class="pillar-copy">
             <span class="pillar-num">02</span>
             <h3>Commitment</h3>
@@ -948,7 +1111,7 @@ footer{
           </div>
         </div>
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://placehold.co/700x700/EBE6DE/554C5B.png?text=Consistency" alt="Consistency"></div>
+          <div class="img-box"><img src="https://picsum.photos/seed/gapconsist/700/700" alt="Consistency"></div>
           <div class="pillar-copy">
             <span class="pillar-num">03</span>
             <h3>Consistency</h3>
@@ -962,7 +1125,7 @@ footer{
   <!-- WHO THIS IS FOR -->
   <section class="split" id="about">
     <div class="img-side">
-      <img src="https://placehold.co/900x1100/5A1626/F4EFE2.png?text=The+GAP" alt="A visionary at work">
+      <img src="https://picsum.photos/seed/gapabout1/900/1100" alt="A visionary at work">
     </div>
     <div class="text-side">
       <span class="eyebrow">Who This Is For</span>
@@ -984,7 +1147,7 @@ footer{
   <!-- WHAT'S INSIDE -->
   <section class="inside" id="inside">
     <div class="wrap">
-      <div class="section-title">
+      <div class="section-title inside-title">
         <span class="stars">✦ ✦ ✦</span>
         <h2>What's Inside</h2>
         <p class="sub">By joining The GAP, you get:</p>
@@ -1041,6 +1204,13 @@ footer{
     </div>
   </section>
 
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <p>Stop planning it. Start executing it.</p>
+    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <span class="microcopy">Signup and pricing on Skool</span>
+  </div>
+
   <!-- BEFORE / AFTER -->
   <section class="ba">
     <div class="wrap">
@@ -1071,6 +1241,13 @@ footer{
       </div>
     </div>
   </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <p>This could be your before and after</p>
+    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <span class="microcopy">Signup and pricing on Skool</span>
+  </div>
 
   <!-- INSIDE THE COMMUNITY -->
   <section class="community">
@@ -1113,6 +1290,13 @@ footer{
       </div>
     </div>
   </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <p>Your seat in the community is waiting</p>
+    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <span class="microcopy">Signup and pricing on Skool</span>
+  </div>
 
   <!-- IMAGE BAND -->
   <section class="imgband">
@@ -1187,7 +1371,7 @@ footer{
         <div class="review-card">
           <p class="quote">"The GAP X Evolving Virtually has helped me in my quest to build my business from the ground up through faith, motivation, consistency, and true support. This community has been a confidence boost — being able to relate to business owners who are struggling like I was, and who continue to push me to do my best. That's how I still haven't given up, and I've made sales for my business."</p>
           <div class="who">
-            <img src="https://placehold.co/120x120/B76E79/F4EFE2.png?text=L" alt="Lexi">
+            <img src="https://picsum.photos/seed/gaplexi/120/120" alt="Lexi">
             <div>
               <div class="name">Lexi</div>
               <div class="role">Refined Royalty LLC</div>
@@ -1197,7 +1381,7 @@ footer{
         <div class="review-card">
           <p class="quote">"[Testimonial placeholder — swap in a real member story as they come in.]"</p>
           <div class="who">
-            <img src="https://placehold.co/120x120/B76E79/F4EFE2.png?text=%3F" alt="Member">
+            <img src="https://picsum.photos/seed/gapmember1/120/120" alt="Member">
             <div>
               <div class="name">Member Name</div>
               <div class="role">What they're building</div>
@@ -1207,11 +1391,55 @@ footer{
         <div class="review-card">
           <p class="quote">"[Testimonial placeholder — swap in a real member story as they come in.]"</p>
           <div class="who">
-            <img src="https://placehold.co/120x120/B76E79/F4EFE2.png?text=%3F" alt="Member">
+            <img src="https://picsum.photos/seed/gapmember2/120/120" alt="Member">
             <div>
               <div class="name">Member Name</div>
               <div class="role">What they're building</div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO TESTIMONIALS -->
+  <section class="video-reviews">
+    <div class="wrap">
+      <div class="section-title">
+        <span class="stars">✦ ✦ ✦</span>
+        <h2>Watch Their Stories</h2>
+        <p class="sub">Real members, real breakthroughs — on camera.</p>
+        <div class="rule-under"></div>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <img src="https://picsum.photos/seed/gapvideo1/600/860" alt="Member video testimonial">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="video-caption">
+            <div class="name">Member Testimonial</div>
+            <div class="role">Video placeholder — swap in a real clip</div>
+          </div>
+        </div>
+        <div class="video-card">
+          <img src="https://picsum.photos/seed/gapvideo2/600/860" alt="Member video testimonial">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="video-caption">
+            <div class="name">Member Testimonial</div>
+            <div class="role">Video placeholder — swap in a real clip</div>
+          </div>
+        </div>
+        <div class="video-card">
+          <img src="https://picsum.photos/seed/gapvideo3/600/860" alt="Member video testimonial">
+          <div class="video-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="video-caption">
+            <div class="name">Member Testimonial</div>
+            <div class="role">Video placeholder — swap in a real clip</div>
           </div>
         </div>
       </div>
