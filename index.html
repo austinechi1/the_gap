@@ -312,27 +312,18 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 .hero{
   min-height:92vh;
   display:flex;
-  align-items:flex-end;
+  align-items:center;
   position:relative;
   overflow:hidden;
-  background:url('hero-ocean-fallback.jpg') center/cover no-repeat;
+  background:url('hero-ocean-fallback.png') center/cover no-repeat;
 }
 .hero::after{
   content:'';
   position:absolute;
   inset:0;
   z-index:1;
-  background:linear-gradient(90deg, rgba(66,15,28,0.42) 0%, rgba(66,15,28,0.80) 55%, rgba(66,15,28,0.93) 100%);
+  background:linear-gradient(90deg, rgba(66,15,28,0.90) 0%, rgba(66,15,28,0.76) 50%, rgba(66,15,28,0.56) 100%);
   pointer-events:none;
-}
-.hero-video{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
 }
 .hero-inner{
   position:relative;
@@ -341,12 +332,14 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   max-width:1400px;
   margin:0 auto;
   padding:var(--gap-l) var(--edge) var(--gap-l);
-  display:flex;
-  justify-content:flex-end;
+  display:grid;
+  grid-template-columns:minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items:center;
+  gap:clamp(2rem, 4vw, 5rem);
 }
 .hero-content{
   max-width:640px;
-  text-align:right;
+  text-align:left;
 }
 .hero-content .eyebrow{color:var(--mauve);margin-bottom:1.2rem;}
 .hero-content h1{
@@ -374,6 +367,41 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   line-height:1.75;
 }
 .hero-content .btn{margin-top:2.1rem;}
+.hero-media{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/5;
+  max-height:70vh;
+  overflow:hidden;
+  border:1px solid rgba(244,239,226,0.38);
+  box-shadow:0 24px 60px rgba(42,10,17,0.42);
+  background:rgba(66,15,28,0.45) url('hero-ocean-fallback.png') center/cover no-repeat;
+}
+.hero-video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+@media (max-width:860px){
+  .hero{min-height:auto;}
+  .hero-inner{
+    grid-template-columns:1fr;
+    padding-top:var(--gap-l);
+    padding-bottom:var(--gap-l);
+    gap:var(--gap-m);
+  }
+  .hero-content{max-width:680px;}
+  .hero-media{
+    aspect-ratio:16/10;
+    max-height:none;
+  }
+}
+@media (max-width:560px){
+  .hero::after{background:rgba(66,15,28,0.78);}
+  .hero-media{aspect-ratio:9/12;}
+}
 
 /* ---------- STAT BAND ---------- */
 .stat-band{
@@ -1004,9 +1032,6 @@ footer{
 
   <!-- HERO -->
   <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline poster="hero-ocean-fallback.jpg" aria-hidden="true">
-      <source src="hero-ocean-video.mp4" type="video/mp4">
-    </video>
     <div class="hero-inner">
       <div class="hero-content">
         <span class="eyebrow">The G.A.P Community</span>
@@ -1015,6 +1040,11 @@ footer{
         <p class="body">You have the idea. You have the vision. Here's the truth: you don't have a follow-through problem. You have <span class="pop on-dark">a gap</span> — the space between where you are now, and where God is calling you to go. And <span class="pop on-dark">you weren't meant to close that gap alone.</span> The GAP is a God-first community for creative entrepreneurs and visionaries who are done sitting on their calling and ready to actually execute it.</p>
         <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
         <span class="microcopy">Signup and pricing on Skool</span>
+      </div>
+      <div class="hero-media">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="hero-ocean-fallback.png" aria-label="Ocean video">
+          <source src="hero-ocean-video.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
