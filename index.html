@@ -392,32 +392,50 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 }
 .hero-sound{
   position:absolute;
-  right:1rem;
-  bottom:1rem;
+  right:clamp(0.75rem, 2vw, 1.1rem);
+  bottom:clamp(0.75rem, 2vw, 1.1rem);
   z-index:3;
   display:inline-flex;
   align-items:center;
-  gap:0.45rem;
-  padding:0.7rem 0.9rem;
-  border:1px solid rgba(255,255,255,0.55);
-  background:rgba(66,15,28,0.88);
+  gap:0.55rem;
+  min-height:42px;
+  padding:0.7rem 1rem;
+  border:1px solid rgba(244,239,226,0.48);
+  border-radius:999px;
+  background:linear-gradient(145deg, rgba(122,36,56,0.94), rgba(66,15,28,0.96));
   color:var(--cream);
+  box-shadow:0 8px 24px rgba(42,10,17,0.34), inset 0 1px 0 rgba(255,255,255,0.16);
   font-family:var(--sans);
-  font-size:0.72rem;
+  font-size:0.7rem;
   font-weight:800;
-  letter-spacing:0.08em;
+  letter-spacing:0.12em;
+  line-height:1;
   text-transform:uppercase;
   cursor:pointer;
-  backdrop-filter:blur(6px);
-  transition:background .3s ease, transform .3s ease;
+  backdrop-filter:blur(8px);
+  transition:transform .3s ease, background .3s ease, border-color .3s ease;
 }
 .hero-sound:hover{
-  background:var(--burgundy);
   transform:translateY(-2px);
+  border-color:rgba(244,239,226,0.8);
+  background:linear-gradient(145deg, #8A2C42, var(--burgundy));
 }
 .hero-sound:focus-visible{
   outline:2px solid var(--cream);
   outline-offset:3px;
+}
+.hero-sound svg{
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.hero-sound[data-sound="on"]{
+  background:linear-gradient(145deg, var(--mauve), var(--mauve-deep));
 }
 @media (max-width:860px){
   .hero{min-height:auto;}
@@ -1087,7 +1105,14 @@ footer{
         <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Ocean video">
           <source src="hero-ocean-video.mp4" type="video/mp4">
         </video>
-        <button class="hero-sound" id="heroSound" type="button" aria-pressed="false">🔊 Turn Sound On</button>
+        <button class="hero-sound" id="heroSound" type="button" data-sound="off" aria-pressed="false" aria-label="Turn video sound on">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6.5 9H3v6h3.5L11 19V5Z"></path>
+            <path d="M15 9.5a4 4 0 0 1 0 5"></path>
+            <path d="M17.8 7a7.5 7.5 0 0 1 0 10"></path>
+          </svg>
+          <span>Sound On</span>
+        </button>
       </div>
     </div>
   </section>
@@ -1496,13 +1521,16 @@ footer{
 // Load and start the hero video as soon as the page is ready.
 const heroVideo = document.getElementById('heroVideo');
 const heroSound = document.getElementById('heroSound');
+const heroSection = document.querySelector('.hero');
 if (heroVideo) {
+  let heroInView = true;
   heroVideo.muted = true;
   heroVideo.defaultMuted = true;
   heroVideo.setAttribute('muted', '');
   heroVideo.load();
 
   const playHeroVideo = () => {
+    if (!heroInView || document.hidden) return;
     const playAttempt = heroVideo.play();
     if (playAttempt !== undefined) playAttempt.catch(() => {});
   };
@@ -1511,17 +1539,39 @@ if (heroVideo) {
   else heroVideo.addEventListener('canplay', playHeroVideo, { once: true });
 
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && heroVideo.paused) playHeroVideo();
+    if (document.hidden) {
+      heroVideo.pause();
+    } else if (heroInView && heroVideo.paused) {
+      playHeroVideo();
+    }
   });
+
+  if (heroSection && 'IntersectionObserver' in window) {
+    const heroVideoObserver = new IntersectionObserver(([entry]) => {
+      heroInView = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+      if (heroInView) {
+        playHeroVideo();
+      } else {
+        heroVideo.pause();
+        if (heroVideo.readyState > 0) heroVideo.currentTime = 0;
+      }
+    }, { threshold: [0, 0.15] });
+
+    heroVideoObserver.observe(heroSection);
+  }
 
   if (heroSound) {
     heroSound.addEventListener('click', () => {
       heroVideo.muted = !heroVideo.muted;
-      heroSound.textContent = heroVideo.muted ? '🔊 Turn Sound On' : '🔇 Mute Sound';
-      heroSound.setAttribute('aria-pressed', String(!heroVideo.muted));
+      const soundIsOn = !heroVideo.muted;
+      heroSound.dataset.sound = soundIsOn ? 'on' : 'off';
+      heroSound.setAttribute('aria-pressed', String(soundIsOn));
+      heroSound.setAttribute('aria-label', soundIsOn ? 'Mute video sound' : 'Turn video sound on');
+      heroSound.querySelector('span').textContent = soundIsOn ? 'Sound Off' : 'Sound On';
       playHeroVideo();
     });
   }
+
 }
 
 // Hamburger menu
