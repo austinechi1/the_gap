@@ -314,11 +314,29 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   display:flex;
   align-items:flex-end;
   position:relative;
-  background:
-    linear-gradient(90deg, rgba(66,15,28,0.35) 0%, rgba(66,15,28,0.78) 55%, rgba(66,15,28,0.93) 100%),
-    url('https://picsum.photos/seed/gaphero1/1800/1200') center/cover no-repeat;
+  overflow:hidden;
+  background:url('hero-ocean-fallback.jpg') center/cover no-repeat;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg, rgba(66,15,28,0.42) 0%, rgba(66,15,28,0.80) 55%, rgba(66,15,28,0.93) 100%);
+  pointer-events:none;
+}
+.hero-video{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
 }
 .hero-inner{
+  position:relative;
+  z-index:2;
   width:100%;
   max-width:1400px;
   margin:0 auto;
@@ -474,6 +492,9 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   overflow:hidden;
 }
 .pillar-tile .img-box img{width:100%;height:100%;object-fit:cover;}
+.pillar-tile:nth-child(1) .img-box img{object-position:center 42%;}
+.pillar-tile:nth-child(2) .img-box img{object-position:center 35%;}
+.pillar-tile:nth-child(3) .img-box img{object-position:center 40%;}
 .pillar-copy{padding:var(--gap-s);}
 .pillar-num{
   font-family:var(--sans);
@@ -510,7 +531,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   align-items:stretch;
 }
 .split .img-side{min-height:520px;overflow:hidden;}
-.split .img-side img{width:100%;height:100%;object-fit:cover;}
+.split .img-side img{width:100%;height:100%;object-fit:cover;object-position:center 42%;}
 .split .text-side{
   background:var(--burgundy);
   color:var(--cream);
@@ -687,30 +708,6 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   .community-row{grid-template-columns:1fr;gap:0.3rem;}
 }
 
-/* ---------- IMAGE BAND ---------- */
-.imgband{
-  position:relative;
-  min-height:46vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:
-    linear-gradient(rgba(66,15,28,0.62), rgba(66,15,28,0.62)),
-    url('https://picsum.photos/seed/gapband1/1800/900') center/cover no-repeat;
-}
-.imgband p{
-  font-family:var(--serif);
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.05em;
-  color:var(--cream);
-  font-size:clamp(1.5rem, 1.1rem + 2.4vw, 2.9rem);
-  max-width:900px;
-  padding:0 var(--edge);
-  line-height:1.3;
-}
-
 /* ---------- HOW IT WORKS ---------- */
 .how{padding:var(--gap-xl) 0;background:var(--cream);}
 .how-list{max-width:900px;margin:0 auto;}
@@ -754,8 +751,9 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 .reviews{padding:var(--gap-xl) 0;background:var(--cream-2);}
 .review-grid{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:var(--gap-s);
+  align-items:stretch;
 }
 .review-card{
   background:var(--white);
@@ -778,9 +776,6 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   padding-top:1rem;
   border-top:1px solid rgba(85,76,91,0.16);
 }
-.review-card .who img{
-  width:52px;height:52px;border-radius:50%;object-fit:cover;
-}
 .review-card .who .name{
   font-family:var(--serif);
   font-weight:700;
@@ -789,69 +784,6 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
 }
 .review-card .who .role{font-size:0.78rem;color:var(--slate);opacity:0.8;}
 @media (max-width:860px){.review-grid{grid-template-columns:1fr;}}
-
-/* ---------- VIDEO TESTIMONIALS ---------- */
-.video-reviews{padding:var(--gap-xl) 0;background:var(--cream);}
-.video-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:var(--gap-s);
-}
-.video-card{
-  position:relative;
-  aspect-ratio:9/13;
-  overflow:hidden;
-  cursor:pointer;
-  background:var(--burgundy-deep);
-}
-.video-card img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .5s ease;
-}
-.video-card:hover img{transform:scale(1.06);}
-.video-card::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(0deg, rgba(42,10,17,0.85) 0%, rgba(42,10,17,0.1) 45%, rgba(42,10,17,0.35) 100%);
-}
-.video-play{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:clamp(52px, 44px + 2vw, 68px);
-  height:clamp(52px, 44px + 2vw, 68px);
-  border-radius:50%;
-  background:linear-gradient(160deg, #C98590 0%, var(--mauve) 55%, var(--mauve-deep) 100%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 20px rgba(0,0,0,0.35);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:2;
-  transition:transform .3s ease;
-}
-.video-card:hover .video-play{transform:translate(-50%,-50%) scale(1.08);}
-.video-play svg{width:38%;height:38%;fill:var(--cream);margin-left:3px;}
-.video-caption{
-  position:absolute;
-  left:0;right:0;bottom:0;
-  z-index:2;
-  padding:1.1rem 1.2rem;
-  color:var(--cream);
-}
-.video-caption .name{
-  font-family:var(--serif);
-  font-weight:900;
-  font-size:1.05rem;
-}
-.video-caption .role{
-  font-size:0.76rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--mauve);
-  margin-top:0.2rem;
-}
-@media (max-width:860px){.video-grid{grid-template-columns:1fr;}}
 
 /* ---------- CHECKLIST ---------- */
 .fit{padding:var(--gap-xl) 0;}
@@ -972,7 +904,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   justify-content:center;
   background:
     linear-gradient(rgba(66,15,28,0.55), rgba(66,15,28,0.55)),
-    url('https://picsum.photos/seed/gapfooter1/1800/800') center/cover no-repeat;
+    url('footer-business-background.jpeg') center/cover no-repeat;
 }
 .footer-photo img{height:clamp(46px, 34px + 3vw, 70px);width:auto;filter:brightness(0) invert(1);opacity:0.95;}
 
@@ -1060,7 +992,7 @@ footer{
       <a href="#how">How It Works</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
-      <a href="#join" class="btn">Join</a>
+      <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">Join</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1072,13 +1004,16 @@ footer{
 
   <!-- HERO -->
   <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="hero-ocean-fallback.jpg" aria-hidden="true">
+      <source src="hero-ocean-video.mp4" type="video/mp4">
+    </video>
     <div class="hero-inner">
       <div class="hero-content">
         <span class="eyebrow">The G.A.P Community</span>
         <h1>Close the gap between vision and execution</h1>
         <p class="subline">"The space between where you are now, and the purpose God has placed within you."</p>
         <p class="body">You have the idea. You have the vision. Here's the truth: you don't have a follow-through problem. You have <span class="pop on-dark">a gap</span> — the space between where you are now, and where God is calling you to go. And <span class="pop on-dark">you weren't meant to close that gap alone.</span> The GAP is a God-first community for creative entrepreneurs and visionaries who are done sitting on their calling and ready to actually execute it.</p>
-        <a href="#join" class="btn">I Wanna Close The GAP</a>
+        <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
         <span class="microcopy">Signup and pricing on Skool</span>
       </div>
     </div>
@@ -1116,7 +1051,7 @@ footer{
       </div>
       <div class="pillar-grid">
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://picsum.photos/seed/gapclarity/700/700" alt="Clarity"></div>
+          <div class="img-box"><img src="pillar-clarity.jpeg" alt="Clarity"></div>
           <div class="pillar-copy">
             <span class="pillar-num">01</span>
             <h3>Clarity</h3>
@@ -1124,7 +1059,7 @@ footer{
           </div>
         </div>
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://picsum.photos/seed/gapcommit/700/700" alt="Commitment"></div>
+          <div class="img-box"><img src="pillar-commitment.jpeg" alt="Commitment"></div>
           <div class="pillar-copy">
             <span class="pillar-num">02</span>
             <h3>Commitment</h3>
@@ -1132,7 +1067,7 @@ footer{
           </div>
         </div>
         <div class="pillar-tile reveal">
-          <div class="img-box"><img src="https://picsum.photos/seed/gapconsist/700/700" alt="Consistency"></div>
+          <div class="img-box"><img src="pillar-consistency.png" alt="Consistency"></div>
           <div class="pillar-copy">
             <span class="pillar-num">03</span>
             <h3>Consistency</h3>
@@ -1146,7 +1081,7 @@ footer{
   <!-- WHO THIS IS FOR -->
   <section class="split" id="about">
     <div class="img-side">
-      <img src="https://picsum.photos/seed/gapabout1/900/1100" alt="A visionary at work">
+      <img src="visionary-business-photo.jpg" alt="Zania, a visionary business owner at work">
     </div>
     <div class="text-side">
       <span class="eyebrow">Who This Is For</span>
@@ -1161,7 +1096,7 @@ footer{
   <!-- CTA STRIP -->
   <div class="cta-strip">
     <p>Ready to close your gap?</p>
-    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
     <span class="microcopy">Signup and pricing on Skool</span>
   </div>
 
@@ -1223,13 +1158,6 @@ footer{
     </div>
   </section>
 
-  <!-- CTA STRIP -->
-  <div class="cta-strip">
-    <p>Stop planning it. Start executing it.</p>
-    <a href="#join" class="btn">I Wanna Close The GAP</a>
-    <span class="microcopy">Signup and pricing on Skool</span>
-  </div>
-
   <!-- BEFORE / AFTER -->
   <section class="ba">
     <div class="wrap">
@@ -1262,7 +1190,7 @@ footer{
   <!-- CTA STRIP -->
   <div class="cta-strip">
     <p>This could be your before and after</p>
-    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
     <span class="microcopy">Signup and pricing on Skool</span>
   </div>
 
@@ -1304,18 +1232,6 @@ footer{
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- CTA STRIP -->
-  <div class="cta-strip">
-    <p>Your seat in the community is waiting</p>
-    <a href="#join" class="btn">I Wanna Close The GAP</a>
-    <span class="microcopy">Signup and pricing on Skool</span>
-  </div>
-
-  <!-- IMAGE BAND -->
-  <section class="imgband">
-    <p>You weren't meant to close this gap alone</p>
   </section>
 
   <!-- HOW IT WORKS -->
@@ -1368,7 +1284,7 @@ footer{
   <!-- CTA STRIP -->
   <div class="cta-strip">
     <p>You weren't meant to close this alone</p>
-    <a href="#join" class="btn">I Wanna Close The GAP</a>
+    <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
     <span class="microcopy">Signup and pricing on Skool</span>
   </div>
 
@@ -1382,7 +1298,6 @@ footer{
         <div class="review-card">
           <p class="quote">"The GAP X Evolving Virtually has helped me in my quest to build my business from the ground up through faith, motivation, consistency, and true support. This community has been a confidence boost — being able to relate to business owners who are struggling like I was, and who continue to push me to do my best. That's how I still haven't given up, and I've made sales for my business."</p>
           <div class="who">
-            <img src="https://picsum.photos/seed/gaplexi/120/120" alt="Lexi">
             <div>
               <div class="name">Lexi</div>
               <div class="role">Refined Royalty LLC</div>
@@ -1390,65 +1305,11 @@ footer{
           </div>
         </div>
         <div class="review-card">
-          <p class="quote">"[Testimonial placeholder — swap in a real member story as they come in.]"</p>
+          <p class="quote">“I’ve known Zania since she was around 17–18 years old, and ever since her early 20s, she has helped me pave the way for my clothing line. Z is precise, determined, disciplined, and straightforward. She shocked me with how much she can manage. She will push you to do your best and be your best, and as patient and understanding as she is, she doesn’t play around.<br><br>She is someone worth having on your team. Just make sure you are ready to be consistent because she’s a sweetheart, but she means business and expects you to stand on it. With that push alone, she has helped me buckle down on certain aspects of my brand that I normally wouldn’t care to focus on. She’s one of those individuals you simply have to experience for yourself.”</p>
           <div class="who">
-            <img src="https://picsum.photos/seed/gapmember1/120/120" alt="Member">
             <div>
-              <div class="name">Member Name</div>
-              <div class="role">What they're building</div>
+              <div class="name">Laudy</div>
             </div>
-          </div>
-        </div>
-        <div class="review-card">
-          <p class="quote">"[Testimonial placeholder — swap in a real member story as they come in.]"</p>
-          <div class="who">
-            <img src="https://picsum.photos/seed/gapmember2/120/120" alt="Member">
-            <div>
-              <div class="name">Member Name</div>
-              <div class="role">What they're building</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VIDEO TESTIMONIALS -->
-  <section class="video-reviews">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Watch Their Stories</h2>
-        <p class="sub">Real members, real breakthroughs — on camera.</p>
-      </div>
-      <div class="video-grid">
-        <div class="video-card">
-          <img src="https://picsum.photos/seed/gapvideo1/600/860" alt="Member video testimonial">
-          <div class="video-play">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="video-caption">
-            <div class="name">Member Testimonial</div>
-            <div class="role">Video placeholder — swap in a real clip</div>
-          </div>
-        </div>
-        <div class="video-card">
-          <img src="https://picsum.photos/seed/gapvideo2/600/860" alt="Member video testimonial">
-          <div class="video-play">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="video-caption">
-            <div class="name">Member Testimonial</div>
-            <div class="role">Video placeholder — swap in a real clip</div>
-          </div>
-        </div>
-        <div class="video-card">
-          <img src="https://picsum.photos/seed/gapvideo3/600/860" alt="Member video testimonial">
-          <div class="video-play">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <div class="video-caption">
-            <div class="name">Member Testimonial</div>
-            <div class="role">Video placeholder — swap in a real clip</div>
           </div>
         </div>
       </div>
@@ -1481,7 +1342,7 @@ footer{
     <p>This is the space between where you are now… and where God is calling you to go. And when you try to close that gap by yourself, you don't just move slower — <span class="pop on-dark">you stop moving at all.</span> Isolation doesn't build momentum. It builds standstill.</p>
     <p>Scripture never framed this as a solo mission. Two are better than one, because when one falls, there's someone there to lift them back up. <span class="pop on-dark">Iron sharpens iron.</span> We were built to walk this out in community, not in isolation.</p>
     <p>That's what The G.A.P is for. <span class="pop on-dark">Guidance</span> when you don't know the next step. <span class="pop on-dark">Accountability</span> when your feelings say quit. And a community that reminds you, every day, that your purpose is worth fighting for.</p>
-    <a href="#" class="btn">I Am Ready to Close The GAP</a>
+    <a href="https://www.skool.com/the-execution-circle-3516/about" class="btn" target="_blank" rel="noopener noreferrer">I Am Ready to Close The GAP</a>
     <span class="microcopy">Signup and pricing on Skool</span>
   </section>
 
@@ -1541,14 +1402,14 @@ footer{
     </div>
     <div class="footer-col">
       <h4>Join</h4>
-      <a href="#join">I Wanna Close The GAP</a>
+      <a href="https://www.skool.com/the-execution-circle-3516/about" target="_blank" rel="noopener noreferrer">I Wanna Close The GAP</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="footer-col">
       <h4>Connect</h4>
       <a href="#">Instagram</a>
-      <a href="#">Skool Community</a>
+      <a href="https://www.skool.com/the-execution-circle-3516/about" target="_blank" rel="noopener noreferrer">Skool Community</a>
       <a href="#">Contact</a>
     </div>
   </div>
