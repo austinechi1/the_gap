@@ -379,7 +379,7 @@ nav.primary-nav .btn{padding:0.85em 1.7em;font-size:0.7rem;}
   overflow:hidden;
   border:1px solid rgba(244,239,226,0.38);
   box-shadow:0 24px 60px rgba(42,10,17,0.42);
-  background:rgba(66,15,28,0.45) url('hero-ocean-fallback.png') center/cover no-repeat;
+  background:var(--burgundy-deep);
 }
 .hero-video{
   display:block;
@@ -1053,7 +1053,7 @@ footer{
         <span class="microcopy">Signup and pricing on Skool</span>
       </div>
       <div class="hero-media">
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="hero-ocean-fallback.png" aria-label="Ocean video">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Ocean video">
           <source src="hero-ocean-video.mp4" type="video/mp4">
         </video>
       </div>
@@ -1461,6 +1461,27 @@ footer{
 </footer>
 
 <script>
+// Load and start the hero video as soon as the page is ready.
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo) {
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.setAttribute('muted', '');
+  heroVideo.load();
+
+  const playHeroVideo = () => {
+    const playAttempt = heroVideo.play();
+    if (playAttempt !== undefined) playAttempt.catch(() => {});
+  };
+
+  if (heroVideo.readyState >= 2) playHeroVideo();
+  else heroVideo.addEventListener('canplay', playHeroVideo, { once: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && heroVideo.paused) playHeroVideo();
+  });
+}
+
 // Hamburger menu
 const hamburger = document.getElementById('hamburger');
 const nav = document.getElementById('primaryNav');
