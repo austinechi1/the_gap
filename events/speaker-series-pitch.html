@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Concept preview: The GAP's October and November guest speaker events.">
+  <title>Upcoming Conversations | The GAP — Concept Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #5A1626;
+      --burgundy-deep: #420F1C;
+      --cream: #F4EFE2;
+      --cream-light: #FFFDF9;
+      --mauve: #B76E79;
+      --slate: #554C5B;
+      --muted: #786F78;
+      --line: rgba(85, 76, 91, .18);
+      --serif: "Montserrat", sans-serif;
+      --sans: "Mulish", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--slate);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .concept-bar {
+      padding: .65rem 1rem;
+      background: #2E0A14;
+      color: #FFFDF9;
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .concept-bar span { color: #E7A3AD; }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(244,239,226,.96);
+    }
+    .nav {
+      width: min(1160px, calc(100% - 3rem));
+      min-height: 74px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      color: var(--burgundy);
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .brand small {
+      display: block;
+      margin-top: .1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    .nav-note {
+      color: var(--burgundy);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(4.5rem, 10vw, 8rem) 1.5rem clamp(4rem, 8vw, 6.5rem);
+      background:
+        radial-gradient(ellipse at 85% 15%, rgba(183,110,121,.25), transparent 30rem),
+        linear-gradient(135deg, var(--burgundy-deep), var(--burgundy) 68%, #6A2538);
+      color: var(--cream-light);
+    }
+    .hero-inner { width: min(980px, 100%); margin: auto; }
+    .eyebrow {
+      color: #E7A3AD;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 850px;
+      margin: 1.2rem 0 1rem;
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -.045em;
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+    .hero p {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: rgba(255,253,249,.83);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+    .hero-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      margin-top: 2rem;
+      padding: .7rem 1rem;
+      border: 1px solid rgba(255,253,249,.35);
+      color: var(--cream-light);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    main {
+      width: min(1160px, calc(100% - 3rem));
+      margin: auto;
+      padding: clamp(3.5rem, 7vw, 6rem) 0;
+    }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .section-heading h2 {
+      margin: .5rem 0 0;
+      color: var(--burgundy);
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .section-heading p {
+      max-width: 330px;
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .event-card {
+      position: relative;
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(90,22,38,.15);
+      background: var(--cream-light);
+      box-shadow: 0 18px 42px rgba(66,15,28,.08);
+    }
+    .event-card.featured {
+      border-color: rgba(90,22,38,.42);
+      box-shadow: 0 22px 54px rgba(66,15,28,.15);
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem 1.35rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .date {
+      color: var(--burgundy);
+      font-family: var(--serif);
+      font-size: .88rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .status {
+      padding: .38rem .55rem;
+      background: #F1E2E3;
+      color: var(--burgundy);
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .featured .status { background: var(--burgundy); color: var(--cream-light); }
+    .card-body { padding: clamp(1.35rem, 3vw, 2rem); }
+    .speaker-label {
+      color: var(--mauve);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .card-body h3 {
+      margin: .55rem 0 .8rem;
+      color: var(--burgundy);
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .talk-title {
+      min-height: 3.2em;
+      margin-bottom: 1.1rem;
+      color: var(--slate);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .bio {
+      margin-bottom: 1.4rem;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .event-meta {
+      display: grid;
+      gap: .45rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--slate);
+      font-size: .82rem;
+    }
+    .event-meta strong { color: var(--burgundy); }
+    .card-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: auto;
+      padding: 1.25rem 1.35rem;
+      background: #F8F4EC;
+    }
+    .card-action p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .72rem;
+    }
+    .button {
+      display: inline-block;
+      flex-shrink: 0;
+      padding: .85rem 1rem;
+      background: linear-gradient(150deg, #7A2438, var(--burgundy-deep));
+      color: var(--cream-light);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .button:hover, .button:focus-visible { background: #761F34; outline: 2px solid var(--mauve); outline-offset: 3px; }
+    .how-it-works {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      margin-top: clamp(4rem, 8vw, 6.5rem);
+      padding: clamp(1.5rem, 4vw, 3rem);
+      background: var(--burgundy);
+      color: var(--cream-light);
+    }
+    .how-it-works h2 {
+      margin: .5rem 0 0;
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .steps { display: grid; gap: 1rem; }
+    .step {
+      display: grid;
+      grid-template-columns: 2.3rem 1fr;
+      gap: .8rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,253,249,.2);
+    }
+    .step:last-child { padding-bottom: 0; border-bottom: 0; }
+    .step-number { color: #E7A3AD; font-family: var(--serif); font-weight: 900; }
+    .step p { margin: 0; color: rgba(255,253,249,.82); font-size: .9rem; }
+    .step strong { color: var(--cream-light); }
+    .pitch-note {
+      margin-top: 2rem;
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--mauve);
+      background: rgba(183,110,121,.09);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    footer {
+      padding: 1.4rem 1.5rem;
+      background: var(--burgundy-deep);
+      color: rgba(255,253,249,.72);
+      font-size: .72rem;
+      text-align: center;
+    }
+    @media (max-width: 760px) {
+      .event-grid, .how-it-works { grid-template-columns: 1fr; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .talk-title { min-height: 0; }
+    }
+    @media (max-width: 480px) {
+      .nav, main { width: min(100% - 2rem, 1160px); }
+      .nav-note { font-size: .62rem; }
+      .card-action { align-items: start; flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="concept-bar"><span>Concept pitch</span> · Fictional speaker names and event details · Not for publication</div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="../index.html" aria-label="The GAP home">The GAP<small>Guidance · Accountability · Purpose</small></a>
+      <div class="nav-note">Live conversations · Fall 2026</div>
+    </div>
+  </header>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-inner">
+      <span class="eyebrow">Ideas that move you forward</span>
+      <h1 id="page-title">Two voices.<br>One community.</h1>
+      <p>Meet the next conversations from The GAP. Each speaker has a dedicated event page and registration link, while both events stay visible in one shared place.</p>
+      <div class="hero-mark">✦ &nbsp; Separate campaigns, running side by side</div>
+    </div>
+  </section>
+  <main>
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Upcoming events</span>
+        <h2>Choose your next conversation</h2>
+      </div>
+      <p>Promote the next event as soon as its details are ready. Keep the current event discoverable throughout.</p>
+    </div>
+
+    <section class="event-grid" aria-label="Upcoming speaker events">
+      <article class="event-card" id="october-event">
+        <div class="card-top">
+          <div class="date">Wednesday · October 28, 2026</div>
+          <div class="status">Current campaign</div>
+        </div>
+        <div class="card-body">
+          <div class="speaker-label">Guest speaker · Sample profile</div>
+          <h3>Elena Voss</h3>
+          <p class="talk-title">The Courage to Begin Again</p>
+          <p class="bio">A fictional leadership coach helping values-led founders turn hard-won lessons into purposeful next steps.</p>
+          <div class="event-meta">
+            <div><strong>Format:</strong> Live online conversation</div>
+            <div><strong>Time:</strong> 12:00 PM Eastern · Sample time</div>
+          </div>
+        </div>
+        <div class="card-action">
+          <p>Demo CTA · Connect the current registration link</p>
+          <a class="button" href="#pitch-flow">October event details</a>
+        </div>
+      </article>
+
+      <article class="event-card featured" id="november-event">
+        <div class="card-top">
+          <div class="date">Friday · November 13, 2026</div>
+          <div class="status">Announce now</div>
+        </div>
+        <div class="card-body">
+          <div class="speaker-label">Guest speaker · Sample profile</div>
+          <h3>Maya Bennett</h3>
+          <p class="talk-title">From Vision to Visible Momentum</p>
+          <p class="bio">A fictional entrepreneur and community builder sharing practical ways to turn a big idea into consistent action.</p>
+          <div class="event-meta">
+            <div><strong>Format:</strong> Live online conversation</div>
+            <div><strong>Time:</strong> 12:00 PM Eastern · Sample time</div>
+          </div>
+        </div>
+        <div class="card-action">
+          <p>Demo CTA · Connect the November registration link</p>
+          <a class="button" href="#pitch-flow">November event details</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="how-it-works" id="pitch-flow" aria-labelledby="flow-title">
+      <div>
+        <span class="eyebrow">The campaign flow</span>
+        <h2 id="flow-title">Promote both. Confuse no one.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-number">01</div><p><strong>Keep October's page and promotion on schedule.</strong> Its event information and registration link stay in place.</p></div>
+        <div class="step"><div class="step-number">02</div><p><strong>Prepare November's speaker page in parallel.</strong> Add the confirmed bio, topic, time and registration link as soon as they are available.</p></div>
+        <div class="step"><div class="step-number">03</div><p><strong>Start November marketing early.</strong> Share its dedicated page and link, while the shared events page makes both dates easy to find.</p></div>
+      </div>
+    </section>
+
+    <p class="pitch-note"><strong>Pitch preview:</strong> Speaker names, biographies, topics and times on this page are fictional examples. The calls to action are demo links; replace them with approved event pages and registration URLs before publication.</p>
+  </main>
+  <footer>THE GAP · Guidance · Accountability · Purpose · Concept preview only</footer>
+</body>
+</html>
